@@ -69,9 +69,3 @@ sudo rmmod dpu_chardev
 | `dpu_alloc.c`, `dpu_state.h` | Kernel heap allocation of per-device state |
 | `dpu_test.c` | User-space exerciser: write → ioctl → read → clear |
 | `Makefile` | Kbuild wrapper |
-
-## Limitations
-
-- The driver keeps one global buffer; `dpu_state.h` sketches per-device state but `dpu_chardev.c` doesn't use it yet.
-- Reads don't consume the buffer: the data stays until `DPU_CLEAR`, after which reads block until the next write.
-- The user-space test compiles cleanly with `-Wall -Wextra`; the module itself hasn't been build-tested against a specific kernel version here.
